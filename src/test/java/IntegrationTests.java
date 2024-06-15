@@ -1,4 +1,5 @@
 import calculators.Exp4jCalculator;
+import integration.montecarlo.MonteCarloIntegration;
 import integration.rectangle.RectangleIntegration;
 import integration.trapezoid.TrapezoidIntegration;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +14,7 @@ public class IntegrationTests {
 
     private static final RectangleIntegration rectangleIntegration = new RectangleIntegration();
     private static final TrapezoidIntegration trapezoidIntegration = new TrapezoidIntegration();
+    private static final MonteCarloIntegration monteCarloIntegration = new MonteCarloIntegration();
 
     @ParameterizedTest
     @MethodSource("functionsAndIntegrationSpecsProvider")
@@ -24,6 +26,12 @@ public class IntegrationTests {
     @MethodSource("functionsAndIntegrationSpecsProvider")
     void trapezeIntegrationTest(String function, double bottomEdge, double topEdge, int stepCount, double expected) {
         assertEquals(trapezoidIntegration.trapezeIntegration(new Exp4jCalculator(function), bottomEdge, topEdge, stepCount), expected, 0.01);
+    }
+
+    @ParameterizedTest
+    @MethodSource("functionsAndIntegrationSpecsProvider")
+    void monteCarloIntegrationTest(String function, double bottomEdge, double topEdge, int stepCount, double expected) {
+        assertEquals(monteCarloIntegration.monteCarloIntegration(new Exp4jCalculator(function), bottomEdge, topEdge, stepCount), expected, 0.05);
     }
 
     static Stream<Arguments> functionsAndIntegrationSpecsProvider() {
