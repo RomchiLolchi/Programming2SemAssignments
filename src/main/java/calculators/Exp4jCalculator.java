@@ -1,6 +1,7 @@
-package pseudographics;
+package calculators;
 
 import net.objecthunter.exp4j.ExpressionBuilder;
+
 import java.util.Objects;
 
 public class Exp4jCalculator extends Calculator {

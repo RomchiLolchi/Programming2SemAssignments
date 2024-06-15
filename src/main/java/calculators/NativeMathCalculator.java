@@ -1,4 +1,4 @@
-package pseudographics;
+package calculators;
 
 import java.util.Objects;
 

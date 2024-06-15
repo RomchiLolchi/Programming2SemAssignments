@@ -1,5 +1,8 @@
 package pseudographics;
 
+import calculators.Calculator;
+import calculators.Exp4jCalculator;
+
 import java.util.Scanner;
 
 //todo write docs

@@ -1,4 +1,4 @@
-package pseudographics;
+package calculators;
 
 public abstract class Calculator {
     private String function;

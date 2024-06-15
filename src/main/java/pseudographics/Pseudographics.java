@@ -1,5 +1,7 @@
 package pseudographics;
 
+import calculators.Calculator;
+
 import java.util.Collections;
 import java.util.SortedMap;
 import java.util.TreeMap;
