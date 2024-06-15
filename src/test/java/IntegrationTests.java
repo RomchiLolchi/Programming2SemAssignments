@@ -1,22 +1,29 @@
 import calculators.Exp4jCalculator;
 import integration.rectangle.RectangleIntegration;
+import integration.trapezoid.TrapezoidIntegration;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RectangleIntegrationTests {
+public class IntegrationTests {
 
     private static final RectangleIntegration rectangleIntegration = new RectangleIntegration();
+    private static final TrapezoidIntegration trapezoidIntegration = new TrapezoidIntegration();
 
     @ParameterizedTest
     @MethodSource("functionsAndIntegrationSpecsProvider")
-    void integrationTest(String function, double bottomEdge, double topEdge, int stepCount, double expected) {
+    void rectangleIntegrationTest(String function, double bottomEdge, double topEdge, int stepCount, double expected) {
         assertEquals(rectangleIntegration.rectangleIntegration(new Exp4jCalculator(function), bottomEdge, topEdge, stepCount), expected, 0.01);
+    }
+
+    @ParameterizedTest
+    @MethodSource("functionsAndIntegrationSpecsProvider")
+    void trapezeIntegrationTest(String function, double bottomEdge, double topEdge, int stepCount, double expected) {
+        assertEquals(trapezoidIntegration.trapezeIntegration(new Exp4jCalculator(function), bottomEdge, topEdge, stepCount), expected, 0.01);
     }
 
     static Stream<Arguments> functionsAndIntegrationSpecsProvider() {
