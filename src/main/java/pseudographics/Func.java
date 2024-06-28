@@ -1,22 +1,20 @@
 package pseudographics;
 
-import calculators.Calculator;
-
 import java.util.Collections;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.function.Function;
 
-public class Pseudographics {
+public class Func {
 
-    private static final double yScalingFactor = 0.3;
+    private static final double yScalingFactor = 15;
 
-    public void drawSymbolPlot(Calculator calculator, double bottomEdge, double topEdge, int stringCount) {
-        SortedMap<Double, Double> xyPairs = new TreeMap<>();
-        double xStep = (topEdge - bottomEdge) / stringCount;
-        for (double x = bottomEdge; x <= topEdge; x += xStep) {
-            xyPairs.put(x, calculator.func(x));
+    public static void drawSymbolPlot(Function<Float, Float> func, Float bottomEdge, Float topEdge, Integer stringCount) {
+        SortedMap<Float, Float> xyPairs = new TreeMap<>();
+        float xStep = (topEdge - bottomEdge) / stringCount;
+        for (float x = bottomEdge; x <= topEdge; x += xStep) {
+            xyPairs.put(x, func.apply(x));
         }
-
 
         int yGraphicStep = (int) Math.round((Collections.max(xyPairs.values()) - Collections.min(xyPairs.values())) / yScalingFactor);
 
