@@ -1,7 +1,8 @@
 package sort.bubble;
 
+//todo rename
 public class BubbleSort {
-    public int[] bubbleSorting(int[] array) {
+    public static Integer[] bubbleSorting(Integer[] array) {
         int n = array.length;
         int temp;
         for (int i = 0; i < n; i++) {

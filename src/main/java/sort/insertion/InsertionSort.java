@@ -1,7 +1,8 @@
 package sort.insertion;
 
+//todo rename
 public class InsertionSort {
-    public int[] insertionSort(int[] array) {
+    public static Integer[] insertionSort(Integer[] array) {
         for (int i = 1; i < array.length; i++) {
             int key = array[i];
             int j = i - 1;

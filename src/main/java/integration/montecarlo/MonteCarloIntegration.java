@@ -1,15 +1,15 @@
 package integration.montecarlo;
 
-import calculators.Calculator;
-
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
 
+//todo rename class on paste to platform!!!
 public class MonteCarloIntegration {
-    public double monteCarloIntegration(Calculator calculator, double bottomEdge, double topEdge, int stepCount) {
-        double sumY = 0;
-        for (int i = 0; i < stepCount; i++) {
-            sumY += calculator.func(ThreadLocalRandom.current().nextDouble(bottomEdge, topEdge));
+    public static Float monteCarloIntegration(Function<Float, Float> func, Float a, Float b, Integer n) {
+        float sumY = 0;
+        for (int i = 0; i < n; i++) {
+            sumY += func.apply(ThreadLocalRandom.current().nextFloat(a, b));
         }
-        return (topEdge - bottomEdge) * sumY / stepCount;
+        return (b - a) * sumY / n;
     }
 }

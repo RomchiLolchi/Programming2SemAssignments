@@ -1,7 +1,8 @@
 package sort.selection;
 
+//todo rename
 public class SelectionSort {
-    public int[] selectionSort(int[] array) {
+    public static Integer[] selectionSort(Integer[] array) {
         int n = array.length;
         int temp;
         for (int i = 0; i < n; i++) {

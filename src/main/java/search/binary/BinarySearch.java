@@ -1,7 +1,8 @@
 package search.binary;
 
+//todo rename
 public class BinarySearch {
-    public int binarySearch(int value, int[] array) {
+    public static Integer binarySearch(Integer value, Integer[] array) {
         int low = 0;
         int high = array.length - 1;
 

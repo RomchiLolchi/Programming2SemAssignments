@@ -1,22 +1,35 @@
 package integration.adaptive_quadrature;
 
-import calculators.Calculator;
 import integration.rectangle.RectangleIntegration;
 
+import java.util.function.Function;
+
+//todo rename class on paste to platform!!!
 public class AdaptiveQuadratureIntegration {
-    public static final RectangleIntegration rectangleIntegration = new RectangleIntegration();
+    @FunctionalInterface
+    public interface Function4<Function, A, B, N, Result> {
+        Result apply(Function function, A a, B b, N n);
+    }
 
-    public double adaptiveIntegration(Calculator calculator, double bottomEdge, double topEdge, double accuracy) {
-        double mid = (bottomEdge + topEdge) / 2;
-        double basicTrap = rectangleIntegration.rectangleIntegration(calculator, bottomEdge, topEdge, 1);
-        double refinedTrap = rectangleIntegration.rectangleIntegration(calculator, bottomEdge, mid, 1) + rectangleIntegration.rectangleIntegration(calculator, mid, topEdge, 1);
+    public static class RectangleIntegrationFunction implements Function4<Function<Float, Float>, Float, Float, Integer, Float> {
 
-        if (Math.abs(refinedTrap - basicTrap) < 3 * accuracy) {
+        @Override
+        public Float apply(Function<Float, Float> func, Float a, Float b, Integer n) {
+            return RectangleIntegration.rectangleIntegration(func, a, b, n);
+        }
+    }
+
+    public static Float adaptiveIntegration(Function4<Function<Float, Float>, Float, Float, Integer, Float> integrationFunc, Function<Float, Float> func, Float a, Float b, Float tol) {
+        float mid = (a + b) / 2;
+        float basicTrap = integrationFunc.apply(func, a, b, 1);
+        float refinedTrap = integrationFunc.apply(func, a, mid, 1) + integrationFunc.apply(func, mid, b, 1);
+
+        if (Math.abs(refinedTrap - basicTrap) < 3 * tol) {
             return refinedTrap;
         } else {
-            double leftIntegral = adaptiveIntegration(calculator, bottomEdge, mid, accuracy/2);
-            double rightIntegral = adaptiveIntegration(calculator, mid, topEdge, accuracy/2);
-            return leftIntegral + rightIntegral;
+            double leftIntegral = adaptiveIntegration(integrationFunc, func, a, mid, tol / 2);
+            double rightIntegral = adaptiveIntegration(integrationFunc, func, mid, b, tol / 2);
+            return (float) (leftIntegral + rightIntegral);
         }
     }
 }

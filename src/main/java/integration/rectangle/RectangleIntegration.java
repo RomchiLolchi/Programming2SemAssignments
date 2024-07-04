@@ -1,14 +1,15 @@
 package integration.rectangle;
 
-import calculators.Calculator;
+import java.util.function.Function;
 
+//todo rename class on paste to platform!!!
 public class RectangleIntegration {
-    public double rectangleIntegration(Calculator calculator, double bottomEdge, double topEdge, int stepCount) {
-        double width = (topEdge - bottomEdge) / stepCount;
-        double totalArea = 0.0;
-        for (int i = 0; i < stepCount; i++) {
-            double x = bottomEdge + i * width;
-            totalArea += calculator.func(x) * width;
+    public static Float rectangleIntegration(Function<Float, Float> func, Float a, Float b, Integer n) {
+        Float width = (b - a) / n;
+        float totalArea = 0.0f;
+        for (int i = 0; i < n; i++) {
+            Float x = a + i * width;
+            totalArea += func.apply(x) * width;
         }
         return totalArea;
     }

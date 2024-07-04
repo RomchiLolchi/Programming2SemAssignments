@@ -1,14 +1,15 @@
 package integration.trapezoid;
 
-import calculators.Calculator;
+import java.util.function.Function;
 
+//todo rename class on paste to platform!!!
 public class TrapezoidIntegration {
-    public double trapezeIntegration(Calculator calculator, double bottomEdge, double topEdge, int stepCount) {
-        double width = (topEdge - bottomEdge) / stepCount;
-        double totalArea = 0.5 * (calculator.func(bottomEdge) + calculator.func(topEdge));
-        for (int i = 1; i < stepCount; i++) {
-            double x = bottomEdge + i * width;
-            totalArea += calculator.func(x);
+    public static Float trapezoidIntegration(Function<Float, Float> func, Float a, Float b, Integer n) {
+        float width = (b - a) / n;
+        float totalArea = 0.5f * (func.apply(a) + func.apply(b));
+        for (int i = 1; i < n; i++) {
+            float x = a + i * width;
+            totalArea += func.apply(x);
         }
         totalArea *= width;
         return totalArea;

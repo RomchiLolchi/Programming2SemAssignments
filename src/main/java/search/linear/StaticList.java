@@ -1,9 +1,9 @@
 package search.linear;
 
-public class LinearSearch {
-    public int linearSearch(int value, int[] array) {
+public class StaticList {
+    public static Integer linearSearch(Integer value, Integer[] array) {
         for (int i = 0; i < array.length; i++) {
-            if (array[i] == value) {
+            if (array[i].equals(value)) {
                 return i;
             }
         }
